@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Archernar</title>
+  <meta name="description" content="Insights on data strategy, product management, AI and the realities of navigating the data river. From the Archernar team." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── BLOG LAYOUT ── */
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* ── FEATURED POST ── */
+
+    .post-featured {
+      background: var(--black);
+      border-radius: 4px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin-bottom: 4rem;
+      position: relative;
+    }
+
+    .post-featured-visual {
+      background: linear-gradient(135deg, #3d1f6b 0%, #1a0a2e 60%, var(--black) 100%);
+      min-height: 380px;
+      display: flex;
+      align-items: flex-end;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .post-featured-visual::before {
+      content: '';
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(204,168,233,0.25) 0%, transparent 70%);
+    }
+
+    .post-featured-visual::after {
+      content: attr(data-category);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lavender-light);
+      border: 1px solid rgba(204,168,233,0.3);
+      padding: 0.3rem 0.75rem;
+      border-radius: 2px;
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+    }
+
+    .featured-icon {
+      font-size: 3rem;
+      position: relative;
+      z-index: 1;
+      opacity: 0.6;
+    }
+
+    .post-featured-content {
+      padding: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .post-featured-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-bottom: 1rem;
+    }
+
+    .post-featured-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      color: var(--off-white);
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .post-featured-excerpt {
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: rgba(248,245,242,0.55);
+      margin-bottom: 1.75rem;
+    }
+
+    .post-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-decoration: none;
+      color: var(--lavender-light);
+      transition: gap 0.2s;
+    }
+
+    .post-link:hover {
+      gap: 0.8rem;
+    }
+
+    .post-link::after {
+      content: '→';
+    }
+
+    /* ── POST CARDS ── */
+
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .post-card {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s;
+    }
+
+    .post-card:first-child {
+      padding-top: 0;
+    }
+
+    .post-card:last-child {
+      border-bottom: none;
+    }
+
+    .post-card:hover .post-card-title {
+      color: var(--purple-mid);
+    }
+
+    .post-card-tags {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+
+    .post-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.25;
+      color: var(--black);
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .post-card-excerpt {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+    }
+
+    .post-card-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      white-space: nowrap;
+      padding-top: 0.2rem;
+    }
+
+    /* ── SIDEBAR ── */
+
+    .sidebar {
+      position: sticky;
+      top: 90px;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .sidebar-widget {
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1.75rem;
+    }
+
+    .widget-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--lavender-dark);
+      margin-bottom: 1.25rem;
+    }
+
+    .topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .topic-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--black);
+      font-size: 0.875rem;
+      transition: color 0.15s;
+    }
+
+    .topic-item:last-child {
+      border-bottom: none;
+    }
+
+    .topic-item:hover {
+      color: var(--purple-mid);
+    }
+
+    .topic-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--text-muted);
+    }
+
+    .newsletter-widget {
+      background: var(--lavender);
+      border-color: transparent;
+    }
+
+    .newsletter-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-desc {
+      font-size: 0.8rem;
+      line-height: 1.65;
+      color: rgba(10,10,10,0.65);
+      margin-bottom: 1.25rem;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      font-size: 0.85rem;
+      font-family: 'DM Sans', sans-serif;
+      border: 1px solid rgba(10,10,10,0.2);
+      border-radius: 2px;
+      background: rgba(255,255,255,0.7);
+      margin-bottom: 0.6rem;
+      outline: none;
+    }
+
+    .newsletter-input:focus {
+      background: white;
+      border-color: var(--purple-mid);
+    }
+
+    .newsletter-btn {
+      width: 100%;
+      padding: 0.65rem;
+      background: var(--black);
+      color: var(--off-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .newsletter-btn:hover {
+      background: var(--purple-deep);
+    }
+
+    /* ── PAGINATION ── */
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+    }
+
+    .page-btn {
+      width: 38px;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      font-size: 0.8rem;
+      text-decoration: none;
+      color: var(--black);
+      transition: all 0.15s;
+    }
+
+    .page-btn.active {
+      background: var(--black);
+      color: var(--off-white);
+      border-color: var(--black);
+    }
+
+    .page-btn:hover:not(.active) {
+      border-color: var(--lavender);
+      color: var(--purple-mid);
+    }
+
+    /* ── SINGLE POST TEMPLATE NOTE ── */
+
+    .template-note {
+      background: rgba(204,168,233,0.08);
+      border: 1px dashed rgba(204,168,233,0.4);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-size: 0.8rem;
+      color: var(--purple-mid);
+      font-family: 'DM Mono', monospace;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1000px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .sidebar { position: static; }
+      .post-featured { grid-template-columns: 1fr; }
+      .post-featured-visual { min-height: 200px; }
+    }
+
+    @media (max-width: 600px) {
+      .post-card { grid-template-columns: 1fr; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">
+      <img src="logo-black.svg" alt="Archernar" class="nav-logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html" class="active">Blog</a></li>
+      <li><a href="mailto:hello@archernardata.com" class="nav-cta">Enquire</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" style="min-height:55vh;">
+    <div class="hero-bg"></div>
+    <div class="hero-content" style="padding:4rem 2.5rem;">
+      <p class="hero-eyebrow fade-up fade-up-1">Perspectives &amp; insights</p>
+      <h1 class="hero-title fade-up fade-up-2" style="font-size:clamp(2.5rem,7vw,5.5rem);">
+        From the <em>river bank</em>
+      </h1>
+      <p class="hero-subtitle fade-up fade-up-3">
+        Views on data strategy, product thinking, AI and the realities of making it all work. No hype.
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <section>
+
+    <!-- TEMPLATE NOTE (remove before publishing) -->
+    <div class="template-note">
+      📝 HOW TO ADD A POST — Duplicate one of the .post-card divs below and update the title, excerpt, date and tags. For a full post page, duplicate post-template.html. The featured post can be updated by editing the .post-featured block. Remove this note before publishing.
+    </div>
+
+    <div class="blog-grid">
+
+      <!-- MAIN COLUMN -->
+      <div>
+
+        <!-- FEATURED POST -->
+        <div class="post-featured">
+          <div class="post-featured-visual" data-category="Data Strategy">
+            <span class="featured-icon">◎</span>
+          </div>
+          <div class="post-featured-content">
+            <p class="post-featured-meta">Featured · May 2025 · Data Strategy</p>
+            <h2 class="post-featured-title">The hype cycle never changes. Your strategy should.</h2>
+            <p class="post-featured-excerpt">
+              From the data warehouse wars of the nineties to the generative AI gold rush today — the pattern repeats. Technology promises transformation, executive FOMO follows, expensive programmes launch, and too many fail to deliver. Here's what the organisations that do succeed have in common.
+            </p>
+            <a href="#" class="post-link">Read the piece</a>
+          </div>
+        </div>
+
+        <!-- SECTION LABEL -->
+        <p class="section-label" style="margin-bottom:0.5rem;">All posts</p>
+
+        <!-- POSTS LIST -->
+        <!-- =====================================================
+          TO ADD A NEW POST: Copy the block below and edit values
+          ===================================================== -->
+        <div class="posts-list">
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">AI &amp; Ethics</span>
+              </div>
+              <h3 class="post-card-title">Why AI literacy matters before AI deployment</h3>
+              <p class="post-card-excerpt">Most organisations are deploying AI faster than they're understanding it. The risk isn't just technical — it's strategic. Here's how to build the literacy your leadership team actually needs.</p>
+            </div>
+            <span class="post-card-date">Apr 2025</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">Product Management</span>
+              </div>
+              <h3 class="post-card-title">Data products need product managers. But not just any kind.</h3>
+              <p class="post-card-excerpt">Software PMs and data PMs share a toolkit, but the challenges differ in important ways. We unpack what makes data product management a discipline worth investing in specifically.</p>
+            </div>
+            <span class="post-card-date">Mar 2025</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">Strategy</span>
+                <span class="tag">OKRs</span>
+              </div>
+              <h3 class="post-card-title">From vision to backlog: making strategy actually land</h3>
+              <p class="post-card-excerpt">The gap between a well-crafted business strategy and the work people actually do is where transformation programmes die. Here's how bi-directional strategy alignment can close it.</p>
+            </div>
+            <span class="post-card-date">Feb 2025</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">Data Ethics</span>
+              </div>
+              <h3 class="post-card-title">GDPR was the warning. AI regulation is the reckoning.</h3>
+              <p class="post-card-excerpt">Organisations that treated GDPR as a box-ticking exercise are now scrambling on AI governance. Those who embedded ethical thinking early are in a far stronger position. Here's the lesson.</p>
+            </div>
+            <span class="post-card-date">Jan 2025</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">Open Data</span>
+                <span class="tag">Public Sector</span>
+              </div>
+              <h3 class="post-card-title">Open data is an opportunity, not just a legal obligation</h3>
+              <p class="post-card-excerpt">Government entities that treat open data as a compliance exercise miss the potential. We look at how forward-thinking organisations are realising economic and social value from what they publish.</p>
+            </div>
+            <span class="post-card-date">Dec 2024</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">Data Literacy</span>
+              </div>
+              <h3 class="post-card-title">Your data team's biggest problem isn't technical</h3>
+              <p class="post-card-excerpt">The communication gap between data experts and business colleagues costs organisations more than bad data does. Here's how to close it from both sides.</p>
+            </div>
+            <span class="post-card-date">Nov 2024</span>
+          </a>
+
+          <a href="#" class="post-card">
+            <div>
+              <div class="post-card-tags">
+                <span class="tag">SME &amp; Start-ups</span>
+              </div>
+              <h3 class="post-card-title">Small organisation, big data ambitions: where to start</h3>
+              <p class="post-card-excerpt">You don't need a data lake or a team of 20 to make data work for you. For SMEs and start-ups, the first steps are often simpler — and more impactful — than you think.</p>
+            </div>
+            <span class="post-card-date">Oct 2024</span>
+          </a>
+
+        </div>
+        <!-- /POSTS LIST -->
+
+        <!-- PAGINATION -->
+        <div class="pagination">
+          <a href="#" class="page-btn active">1</a>
+          <a href="#" class="page-btn">2</a>
+          <a href="#" class="page-btn">3</a>
+          <a href="#" class="page-btn" style="width:auto;padding:0 1rem;">Next →</a>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+
+        <!-- TOPICS -->
+        <div class="sidebar-widget">
+          <p class="widget-label">Browse by topic</p>
+          <div class="topic-list">
+            <a href="#" class="topic-item">
+              <span>Data Strategy</span>
+              <span class="topic-count">12</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>AI &amp; Ethics</span>
+              <span class="topic-count">8</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>Product Management</span>
+              <span class="topic-count">7</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>Data Literacy</span>
+              <span class="topic-count">5</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>Open Data &amp; Public Sector</span>
+              <span class="topic-count">4</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>SME &amp; Start-ups</span>
+              <span class="topic-count">4</span>
+            </a>
+            <a href="#" class="topic-item">
+              <span>Data Commercialisation</span>
+              <span class="topic-count">3</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- NEWSLETTER -->
+        <div class="sidebar-widget newsletter-widget">
+          <p class="widget-label" style="color:rgba(61,31,107,0.6);">Stay in the current</p>
+          <h3 class="newsletter-title">The Data River Brief</h3>
+          <p class="newsletter-desc">Occasional insights on data strategy, product thinking and AI — without the hype. Straight to your inbox.</p>
+          <input type="email" class="newsletter-input" placeholder="your@email.com" />
+          <button class="newsletter-btn">Subscribe →</button>
+        </div>
+
+        <!-- DATA PRIMER CTA -->
+        <div class="sidebar-widget" style="background:var(--black);border-color:rgba(204,168,233,0.15);">
+          <p class="widget-label" style="color:var(--lavender);">Free diagnostic</p>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--off-white);margin-bottom:0.6rem;">Take the Data Primer</h3>
+          <p style="font-size:0.8rem;line-height:1.65;color:rgba(248,245,242,0.5);margin-bottom:1.25rem;">Five minutes. Prioritised view of your data challenges. No obligation.</p>
+          <a href="mailto:hello@archernardata.com?subject=Data Primer" style="display:block;text-align:center;background:var(--lavender);color:var(--black);text-decoration:none;padding:0.65rem;font-size:0.8rem;font-weight:500;border-radius:2px;transition:background 0.2s;" onmouseover="this.style.background='#dfc2f5'" onmouseout="this.style.background='var(--lavender)'">Request the quiz →</a>
+        </div>
+
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="logo-white.svg" alt="Archernar" class="footer-logo" />
+        <p class="footer-tagline">Navigating the data river</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <ul class="footer-links">
+        <li><a href="https://archernardata.com" target="_blank">archernardata.com</a></li>
+        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:hello@archernardata.com">hello@archernardata.com</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Archernar. All rights reserved.</span>
+      <span>Navigating the data river, together.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Archernar</title>
+  <meta name="description" content="Archernar helps organisations break the data-technology hype cycle and deliver sustainable, data-informed business change." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── ABOUT-SPECIFIC ── */
+
+    .about-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-sticky {
+      position: sticky;
+      top: 100px;
+    }
+
+    .vision-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--black);
+      border-left: 2px solid var(--lavender);
+      padding-left: 2rem;
+      margin: 3rem 0;
+    }
+
+    .body-text p {
+      font-size: 0.975rem;
+      line-height: 1.85;
+      color: #444;
+      margin-bottom: 1.5rem;
+    }
+
+    .body-text strong {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    /* Timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+    }
+
+    .timeline-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      color: var(--lavender-dark);
+      padding-top: 0.2rem;
+    }
+
+    .timeline-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .timeline-text strong {
+      display: block;
+      font-size: 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.4rem;
+    }
+
+    .timeline-item:last-child .timeline-text {
+      border-bottom: none;
+    }
+
+    /* Clients */
+    .client-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    .client-cell {
+      background: var(--warm-white);
+      padding: 2rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .client-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--purple-mid);
+      text-align: center;
+    }
+
+    /* Pillars */
+    .pillar-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 2rem;
+    }
+
+    .pillar-item {
+      display: flex;
+      align-items: baseline;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .pillar-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .pillar-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--lavender-dark);
+      min-width: 20px;
+    }
+
+    .pillar-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--black);
+      min-width: 200px;
+    }
+
+    .pillar-desc {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+    }
+
+    /* Star graphic */
+    .star-graphic {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--black);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .star-graphic::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 60% 40%, rgba(204,168,233,0.25) 0%, transparent 60%);
+    }
+
+    .star-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.5rem;
+      font-weight: 300;
+      color: var(--off-white);
+      line-height: 1;
+      position: relative;
+    }
+
+    .star-meaning {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lavender);
+      margin-top: 0.75rem;
+      position: relative;
+    }
+
+    .star-desc {
+      font-size: 0.85rem;
+      color: rgba(248,245,242,0.5);
+      line-height: 1.7;
+      margin-top: 1.5rem;
+      position: relative;
+    }
+
+    /* dot decoration */
+    .dot-field {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(5, 4px);
+      gap: 5px;
+    }
+
+    .dot-field span {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(204,168,233,0.4);
+      display: block;
+    }
+
+    @media (max-width: 900px) {
+      .about-split { grid-template-columns: 1fr; }
+      .about-sticky { position: static; }
+      .client-grid { grid-template-columns: repeat(2, 1fr); }
+      .pillar-item { flex-direction: column; gap: 0.5rem; }
+    }
+
+    @media (max-width: 600px) {
+      .client-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">
+      <img src="logo-black.svg" alt="Archernar" class="nav-logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="mailto:hello@archernardata.com" class="nav-cta">Enquire</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up fade-up-1">About Archernar</p>
+      <h1 class="hero-title fade-up fade-up-2">
+        Breaking the<br /><em>hype cycle</em>
+      </h1>
+      <p class="hero-subtitle fade-up fade-up-3">
+        We help organisations navigate the data river — curious yet cautious,
+        ambitious yet pragmatic, and always data-informed.
+      </p>
+    </div>
+  </div>
+
+  <!-- OUR STORY -->
+  <section>
+    <div class="about-split">
+      <div class="about-sticky">
+        <p class="section-label">Our story</p>
+        <h2 class="section-title">A pattern <em>recognised</em></h2>
+        <div class="star-graphic" style="margin-top:2.5rem;">
+          <div class="dot-field">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <span class="star-name">Archernar</span>
+          <span class="star-meaning">End of the river · Eridanus</span>
+          <p class="star-desc">
+            The brightest star in the constellation Eridanus — the longest
+            north–south constellation in the sky, lending its name to rivers
+            in several ancient cities.
+          </p>
+        </div>
+      </div>
+      <div class="body-text">
+        <blockquote class="vision-quote">
+          "Data, like water, should be life-giving to organisations — if kept clean, safely stored and well managed, it can be."
+        </blockquote>
+        <p>
+          Our Founder spent years working with major corporations, start-ups, scale-ups and governments to deliver data products and programmes. Along the way, a pattern emerged: the organisations struggling most weren't short on ambition. They were short on alignment.
+        </p>
+        <p>
+          There was always a disconnect between business strategy and its execution across the data, technology, and product domains. Just as often, the customer-led innovations of product and data science teams were never properly incorporated back into business strategy. Technology delivery, meanwhile, frequently served neither — leaving innovation teams with the wrong tools and little strategic support.
+        </p>
+        <p>
+          <strong>Archernar was founded to change this.</strong>
+        </p>
+        <p>
+          We help set and inform strategies, plans and backlogs bi-directionally — creating a clear line of sight between organisational goals and the work that delivers them, so every stakeholder can see the value being created and understand their role in it.
+        </p>
+        <p>
+          The name Archernar means 'end of the river' — the destination of a long journey. Data, like the river, should flow. It should sustain. And navigated well, it can power valuable economic and social change for all.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIVIDER -->
+  <div style="max-width:1200px;margin:0 auto;padding:0 2.5rem;"><div class="divider"></div></div>
+
+  <!-- VISION -->
+  <div class="lavender-block">
+    <div class="section-inner">
+      <p class="section-label" style="color:rgba(61,31,107,0.6);">Our vision</p>
+      <h2 class="section-title" style="max-width:700px;">We want to break the data&lt;&gt;technology hype cycle</h2>
+      <div class="pillar-list" style="margin-top:3rem;">
+        <div class="pillar-item">
+          <span class="pillar-num">01</span>
+          <span class="pillar-name">Alignment</span>
+          <span class="pillar-desc">Too many transformation initiatives fail due to poor alignment of business, data, technology and AI/product strategies.</span>
+        </div>
+        <div class="pillar-item">
+          <span class="pillar-num">02</span>
+          <span class="pillar-name">Impact</span>
+          <span class="pillar-desc">We recognise the power of programmes that create real change — for businesses, colleagues, customers and citizens.</span>
+        </div>
+        <div class="pillar-item">
+          <span class="pillar-num">03</span>
+          <span class="pillar-name">Experience</span>
+          <span class="pillar-desc">We understand how and where they can go wrong — especially when data is a critical element.</span>
+        </div>
+        <div class="pillar-item">
+          <span class="pillar-num">04</span>
+          <span class="pillar-name">Measurement</span>
+          <span class="pillar-desc">Our team works with your leadership community to align data-driven initiatives with business goals and identify measurable key results.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE WORK -->
+  <section>
+    <p class="section-label">Innovation &lt;&gt; Implementation &lt;&gt; Inspiration</p>
+    <h2 class="section-title">The Archernar <em>Strategy System™</em></h2>
+    <p class="section-body" style="margin-bottom:3rem;">
+      We developed a proprietary approach to mapping your aims to real activity and providing clear measures of progress to all stakeholders — with a flexible model that can support Data, Product, Technology, AI and People programmes.
+    </p>
+    <div class="card-grid">
+      <div class="card">
+        <p class="card-number">STEP 01</p>
+        <h3 class="card-title">Strategic Vision</h3>
+        <p class="card-body">Organisation-level strategy mapped to key deliverables and measured via defined Outcomes. Clear line of sight from top to bottom, and bottom to top.</p>
+      </div>
+      <div class="card">
+        <p class="card-number">STEP 02</p>
+        <h3 class="card-title">Prioritised Themes</h3>
+        <p class="card-body">Data, Tech, AI and Product themes are prioritised against your strategic pillars, with OKRs and KPIs defined at every level.</p>
+      </div>
+      <div class="card">
+        <p class="card-number">STEP 03</p>
+        <h3 class="card-title">Domain Delivery</h3>
+        <p class="card-body">Themes translate into concrete domains — each with a roadmap of Now, Next, Later outcomes that deliver measurable value at every stage.</p>
+      </div>
+      <div class="card">
+        <p class="card-number">STEP 04</p>
+        <h3 class="card-title">Ongoing Monitoring</h3>
+        <p class="card-body">Post-implementation KPI tracking ensures momentum is maintained and stakeholders at every level can see progress clearly.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENTS -->
+  <div class="dark-block">
+    <div class="section-inner">
+      <p class="section-label">Track record</p>
+      <h2 class="section-title">Organisations we've worked with</h2>
+      <p class="section-body">
+        Before founding Archernar, our team worked with some of the world's most innovative organisations — always focused on the positive opportunities that good data products, backed by sound business strategy, can bring.
+      </p>
+      <div class="client-grid" style="margin-top:3rem;background:rgba(204,168,233,0.08);border-color:rgba(204,168,233,0.15);">
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">Experian</span>
+        </div>
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">Tesco</span>
+        </div>
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">Times Higher Education</span>
+        </div>
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">Virgin</span>
+        </div>
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">Dept. of Government Enablement, UAE</span>
+        </div>
+        <div class="client-cell" style="background:transparent;">
+          <span class="client-name" style="color:var(--lavender-light);">GOV.UK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section style="text-align:center;">
+    <p class="section-label" style="text-align:center;">Start the conversation</p>
+    <h2 class="section-title" style="text-align:center;margin:0 auto 1.5rem;">
+      Ready to navigate the <em>data river?</em>
+    </h2>
+    <p style="color:var(--text-muted);font-size:0.975rem;margin-bottom:2.5rem;">Take our free Data Primer to identify your top priorities, or get in touch directly.</p>
+    <a href="mailto:hello@archernardata.com" style="display:inline-block;background:var(--black);color:var(--off-white);text-decoration:none;padding:0.85rem 2.25rem;font-size:0.875rem;font-weight:500;letter-spacing:0.05em;border-radius:2px;margin-right:1rem;transition:background 0.2s;" onmouseover="this.style.background='#3d1f6b'" onmouseout="this.style.background='#0a0a0a'">Get in touch</a>
+    <a href="services.html" style="display:inline-block;background:transparent;color:var(--black);text-decoration:none;padding:0.85rem 2.25rem;font-size:0.875rem;font-weight:500;letter-spacing:0.05em;border-radius:2px;border:1px solid var(--black);transition:all 0.2s;" onmouseover="this.style.background='var(--black)';this.style.color='var(--off-white)'" onmouseout="this.style.background='transparent';this.style.color='var(--black)'">View services</a>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="logo-white.svg" alt="Archernar" class="footer-logo" />
+        <p class="footer-tagline">Navigating the data river</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <ul class="footer-links">
+        <li><a href="https://archernardata.com" target="_blank">archernardata.com</a></li>
+        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:hello@archernardata.com">hello@archernardata.com</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Archernar. All rights reserved.</span>
+      <span>Navigating the data river, together.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
