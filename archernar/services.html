@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Services — Archernar</title>
+  <meta name="description" content="Archernar services: Data Product Management, becoming data-driven, commercialising data, ethical data use and more." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+
+    /* ── SERVICE HERO ── */
+    .service-intro {
+      background: var(--off-white);
+      padding: 4rem 2.5rem 3rem;
+    }
+
+    /* ── SERVICE CATEGORIES ── */
+    .service-category {
+      padding: 5rem 2.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-category:nth-child(even) {
+      background: var(--off-white);
+    }
+
+    .service-category-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .service-meta {
+      position: sticky;
+      top: 90px;
+    }
+
+    .service-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      background: rgba(204, 168, 233, 0.15);
+      color: var(--purple-mid);
+      padding: 0.35rem 0.75rem;
+      border-radius: 2px;
+      border: 1px solid rgba(204, 168, 233, 0.3);
+      margin-bottom: 1.25rem;
+    }
+
+    .service-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--black);
+      margin-bottom: 1rem;
+    }
+
+    .service-heading em {
+      font-style: italic;
+      color: var(--purple-mid);
+    }
+
+    .service-intro-text {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+
+    /* ── SERVICE ITEMS ── */
+    .service-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .service-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .service-item:first-child {
+      padding-top: 0;
+    }
+
+    .service-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .service-item-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 0.6rem;
+    }
+
+    .service-item-desc {
+      font-size: 0.875rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+    }
+
+    /* ── APPROACH STRIP ── */
+    .approach-strip {
+      background: var(--lavender);
+      padding: 4rem 2.5rem;
+    }
+
+    .approach-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .approach-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .approach-cell {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 4px;
+      padding: 2rem;
+    }
+
+    .approach-cell-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--purple-deep);
+      margin-bottom: 0.75rem;
+    }
+
+    .approach-cell-text {
+      font-size: 0.9rem;
+      line-height: 1.7;
+      color: var(--black);
+    }
+
+    /* ── SME BLOCK ── */
+    .sme-block {
+      background: var(--black);
+      padding: 5rem 2.5rem;
+    }
+
+    .sme-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sme-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .sme-card {
+      background: rgba(204,168,233,0.07);
+      border: 1px solid rgba(204,168,233,0.15);
+      border-radius: 4px;
+      padding: 2rem;
+      transition: border-color 0.2s;
+    }
+
+    .sme-card:hover {
+      border-color: rgba(204,168,233,0.4);
+    }
+
+    .sme-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--lavender-light);
+      margin-bottom: 0.6rem;
+    }
+
+    .sme-card-desc {
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: rgba(248,245,242,0.5);
+    }
+
+    /* ── CTA BLOCK ── */
+    .cta-block {
+      padding: 6rem 2.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .cta-primer {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 3rem;
+      text-align: center;
+    }
+
+    .primer-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--lavender-dark);
+      margin-bottom: 1rem;
+    }
+
+    .primer-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+
+    .primer-desc {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--black);
+      color: var(--off-white);
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--purple-deep);
+    }
+
+    .btn-outline {
+      display: inline-block;
+      background: transparent;
+      color: var(--black);
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      border-radius: 2px;
+      border: 1px solid var(--black);
+      transition: all 0.2s;
+      margin-left: 0.75rem;
+    }
+
+    .btn-outline:hover {
+      background: var(--black);
+      color: var(--off-white);
+    }
+
+    @media (max-width: 900px) {
+      .service-category-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .service-meta { position: static; }
+      .approach-grid { grid-template-columns: 1fr; }
+      .sme-grid { grid-template-columns: 1fr; }
+      .cta-block { grid-template-columns: 1fr; gap: 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">
+      <img src="logo-black.svg" alt="Archernar" class="nav-logo" />
+    </a>
+    <ul class="nav-links">
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="mailto:hello@archernardata.com" class="nav-cta">Enquire</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-up fade-up-1">What we do</p>
+      <h1 class="hero-title fade-up fade-up-2">
+        Outcomes we<br /><em>can realise</em>
+      </h1>
+      <p class="hero-subtitle fade-up fade-up-3">
+        From data strategy to product roadmaps, ethics to commercialisation — tailored services built around your actual goals.
+      </p>
+    </div>
+  </div>
+
+  <!-- APPROACH STRIP -->
+  <div class="approach-strip">
+    <div class="approach-inner">
+      <p class="section-label" style="color:rgba(61,31,107,0.6);">Our approach</p>
+      <h2 class="section-title">Innovation &lt;&gt; Implementation &lt;&gt; Inspiration</h2>
+      <div class="approach-grid">
+        <div class="approach-cell">
+          <p class="approach-cell-label">Curious yet cautious</p>
+          <p class="approach-cell-text">We explore the frontier but don't chase hype. Every recommendation is grounded in evidence and pragmatism.</p>
+        </div>
+        <div class="approach-cell">
+          <p class="approach-cell-label">Ambitious yet pragmatic</p>
+          <p class="approach-cell-text">Bold goals need realistic plans. We help you set stretch targets with achievable paths and measurable milestones.</p>
+        </div>
+        <div class="approach-cell">
+          <p class="approach-cell-label">Always data-informed</p>
+          <p class="approach-cell-text">We apply the same discipline to our own work that we help you build in yours. Decisions driven by evidence, not instinct alone.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 1: DATA PRODUCT MANAGEMENT -->
+  <div class="service-category">
+    <div class="service-category-inner">
+      <div class="service-meta">
+        <span class="service-tag">01</span>
+        <h2 class="service-heading">Data Product <em>Management</em></h2>
+        <p class="service-intro-text">
+          Whether full time, fractional or just to get you started — Product Strategy and Management services to help your business build a data product strategy and roadmap.
+        </p>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <h3 class="service-item-title">Data Product Management</h3>
+          <p class="service-item-desc">Software product management has been growing for nearly 30 years, but the challenges posed by data (and now AI) require a more bespoke approach. We can empower your data people to become product managers, or help existing PMs grasp the value data brings to their software or AI products. Whether you need help hiring, training, or embedding an expert to deliver a new product — we can help.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Product Strategy</h3>
+          <p class="service-item-desc">Delivering AI or software products with a strong data core requires you to think beyond user experience and product design — you also need a data governance model that keeps data accurate and secure while opening it up for your business needs. We align your product strategy with the data foundations you need, using the Archernar Strategy System.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Product Roadmap</h3>
+          <p class="service-item-desc">Once you have the people and strategy, you need to set to work. Using the Archernar Strategy System, we translate your strategic goals into a deliverable, measurable roadmap of outcomes.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 2: BECOMING DATA DRIVEN -->
+  <div class="service-category">
+    <div class="service-category-inner">
+      <div class="service-meta">
+        <span class="service-tag">02</span>
+        <h2 class="service-heading">Becoming <em>Data-Informed</em></h2>
+        <p class="service-intro-text">
+          We prefer "data-informed" — but the aim is the same: helping your organisation use data in a way that increases the veracity of decision-making and your chances of success.
+        </p>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <h3 class="service-item-title">Executive Data Literacy</h3>
+          <p class="service-item-desc">Help your Exec team see the opportunities — not only for the business but for their own teams to make better use of data. Build the support required to make a success of your data programmes.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Engagement</h3>
+          <p class="service-item-desc">Help your people get more excited about their part in your data story, and understand the shared responsibilities that come with that. Help data teams work more closely with, inspire and be inspired by their business colleagues.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Strategy</h3>
+          <p class="service-item-desc">Link your business strategy to defined data-related outcomes that bring measurable benefits to customers, colleagues and the organisation. The Archernar Strategy System helps you build a clear and deliverable programme.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Democratisation</h3>
+          <p class="service-item-desc">Help business users and decision-makers get access to the data, insights and support they need to make great decisions. Share the benefits as well as the responsibility in a way that makes sense for your business today and in the near future.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 3: COMMERCIALISING DATA -->
+  <div class="service-category">
+    <div class="service-category-inner">
+      <div class="service-meta">
+        <span class="service-tag">03</span>
+        <h2 class="service-heading">Commercialising <em>Data</em></h2>
+        <p class="service-intro-text">
+          Whether you want to commercialise data through new software products, sell it directly, or use it to inform decisions — treating data like any other IP or physical asset is a great place to start.
+        </p>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <h3 class="service-item-title">Data Asset Audit</h3>
+          <p class="service-item-desc">Before investing in a Data Catalog and the supporting processes and people, capture and understand your core datasets to identify and prioritise urgent actions.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Value Prioritisation</h3>
+          <p class="service-item-desc">Identify your top commercial opportunities to make better use of data — whether market-facing, cost-saving or risk-related. Work with key colleagues to set a pragmatic path forward.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Market Scan</h3>
+          <p class="service-item-desc">What are your competitors, partners or peers working on that could offer inspiration, opportunity or risk to your data approach? We help you read the landscape clearly.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data as a Product</h3>
+          <p class="service-item-desc">Bring Product Thinking to your approach to data. Create internal or external data products developed and managed sustainably. Build and empower your data product team to deliver measurable value.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 4: DATA SHARING -->
+  <div class="service-category">
+    <div class="service-category-inner">
+      <div class="service-meta">
+        <span class="service-tag">04</span>
+        <h2 class="service-heading">Data Sharing &amp; <em>Economic Growth</em></h2>
+        <p class="service-intro-text">
+          Data is a team sport. Working with others can multiply the benefits to companies, charities and governments. Entire societies can benefit if data sharing is handled in the right way.
+        </p>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <h3 class="service-item-title">Open Data</h3>
+          <p class="service-item-desc">Government entities are often required to release open data by law. With limited resource, this can be challenging and the ROI poorly realised. We help identify the most valuable data to release and understand users better — and help businesses understand the value open data can bring as both user and publisher.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Sharing Programmes</h3>
+          <p class="service-item-desc">Not all data can be open. Not all data can be sold. Some can be shared in a controlled way that benefits both publisher and user while maintaining privacy and security — internally, across defined partners, or with academic/public sector organisations. Creating those mechanisms requires strong data and product management. Archernar can help.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Literacy</h3>
+          <p class="service-item-desc">The ability to read, work with, analyse and communicate with data is the key skill of the 21st century. Not everyone needs to be a data scientist. We help your people take practical steps to becoming data-enabled, and help your data people boost their business literacy so their great work isn't misunderstood.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICE 5: ETHICS & COMPLIANCE -->
+  <div class="service-category">
+    <div class="service-category-inner">
+      <div class="service-meta">
+        <span class="service-tag">05</span>
+        <h2 class="service-heading">Ethical &amp; <em>Compliant</em> Data Use</h2>
+        <p class="service-intro-text">
+          Regulations like GDPR changed how data risks are understood. But too many leadership teams only see the risk — missing opportunities to lead the way in ethical data use. With AI regulations incoming globally, an early ethical approach reduces risk later.
+        </p>
+      </div>
+      <div class="service-items">
+        <div class="service-item">
+          <h3 class="service-item-title">AI Literacy</h3>
+          <p class="service-item-desc">Get the basics without the hype. What can AI do to transform your business? What are the risks? And more importantly — what does your data strategy need to deliver to enable ethical, secure AI?</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">Data Ethics Panel</h3>
+          <p class="service-item-desc">Embed ethics in all data decisions to move beyond box-ticking compliance toward a state where your business can hold itself up as an exemplar to customers, investors and regulators.</p>
+        </div>
+        <div class="service-item">
+          <h3 class="service-item-title">DPO-as-a-Service</h3>
+          <p class="service-item-desc">If a full-time Data Protection Officer isn't yet a necessity, access fractional DPO services to support key data decisions. Our consultants are CIPPe certified to help you navigate GDPR and similar privacy regulations while supporting your commercial data aims.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SME BLOCK -->
+  <div class="sme-block">
+    <div class="sme-inner">
+      <p class="section-label">Tailored for your scale</p>
+      <h2 class="section-title" style="color:var(--off-white);">Services for <em style="color:var(--lavender-light);">SMEs &amp; Start-ups</em></h2>
+      <p class="section-body">Just because your organisation is smaller doesn't mean data isn't important or can't be impactful. Getting it right early can identify opportunities for more rapid and sustainable growth. All our services can be tailored to your needs.</p>
+      <div class="sme-grid">
+        <div class="sme-card">
+          <h3 class="sme-card-title">Data Purpose Audit</h3>
+          <p class="sme-card-desc">What data is driving your business already, and is it being captured, managed and used in the best way? What data is out there that could help you take the next step?</p>
+        </div>
+        <div class="sme-card">
+          <h3 class="sme-card-title">Data Strategy</h3>
+          <p class="sme-card-desc">Link your business strategy to defined data-related outcomes that bring measurable benefits to your customers, colleagues and the organisation.</p>
+        </div>
+        <div class="sme-card">
+          <h3 class="sme-card-title">Data Governance 101</h3>
+          <p class="sme-card-desc">What are the most sensible, low-cost steps you can take to prepare your organisation to leverage data for success? Who should be responsible for what, and how can you support them?</p>
+        </div>
+        <div class="sme-card">
+          <h3 class="sme-card-title">Data Product Strategy</h3>
+          <p class="sme-card-desc">Identify and operationalise the key data that provides most value — internally or externally. Put in place the right processes and commercialise data ethically to maximise utility and protect your IP.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-block">
+    <div>
+      <p class="section-label">No matter your strategic data challenges</p>
+      <h2 class="section-title">Speak to <em>Archernar</em> about how we could help.</h2>
+      <p style="color:var(--text-muted);font-size:0.9rem;line-height:1.75;margin-bottom:2rem;">
+        We work across all sectors, all sizes and all stages of data maturity. Get in touch to start the conversation.
+      </p>
+      <a href="mailto:hello@archernardata.com" class="btn-primary">Get in touch</a>
+      <a href="about.html" class="btn-outline">About us</a>
+    </div>
+    <div class="cta-primer">
+      <p class="primer-label">Free diagnostic</p>
+      <h3 class="primer-title">Take our "Data Primer" quiz</h3>
+      <p class="primer-desc">Identify your top priorities in minutes. Answer a short set of questions and receive a prioritised view of where data strategy can make the most impact for your organisation.</p>
+      <a href="mailto:hello@archernardata.com?subject=Data Primer Quiz" class="btn-primary">Request the Primer</a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <img src="logo-white.svg" alt="Archernar" class="footer-logo" />
+        <p class="footer-tagline">Navigating the data river</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="blog.html">Blog</a></li>
+      </ul>
+      <ul class="footer-links">
+        <li><a href="https://archernardata.com" target="_blank">archernardata.com</a></li>
+        <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+        <li><a href="mailto:hello@archernardata.com">hello@archernardata.com</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Archernar. All rights reserved.</span>
+      <span>Navigating the data river, together.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
